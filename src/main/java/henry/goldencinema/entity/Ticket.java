@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DocumentReference;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.Date;
@@ -19,9 +20,6 @@ public class Ticket {
     private String id;
 
     @Field
-    private String movieTitle, username;
-
-    @Field
     private Date showDateAndTime;
 
     @Field
@@ -29,5 +27,13 @@ public class Ticket {
 
     @Field
     private Integer seat;
+
+    @Field
+    @DocumentReference
+    private String movieTitle;
+
+    @Field
+    @DocumentReference
+    private User user;
 
 }
