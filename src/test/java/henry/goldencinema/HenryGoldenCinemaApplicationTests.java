@@ -1,4 +1,4 @@
-package com.henry.goldencinema;
+package henry.goldencinema;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
