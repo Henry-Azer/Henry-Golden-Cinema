@@ -10,7 +10,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Collection;
 
-@CrossOrigin
 @RestController
 @RequestMapping("/api/movie")
 public class MovieRestController {
