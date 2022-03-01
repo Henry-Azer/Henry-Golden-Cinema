@@ -42,7 +42,8 @@ public class MovieServicesImpl implements MovieServices {
 
     @Override
     public Collection<Movie> getAllMovies() throws Exception {
-        isMovieExist(null, null);
+        if (movieRepository.findAll() == null)
+            throw new Exception("There are no movies");
 
         return movieRepository.findAll();
     }

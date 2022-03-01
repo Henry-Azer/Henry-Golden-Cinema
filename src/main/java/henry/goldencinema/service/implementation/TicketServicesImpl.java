@@ -42,7 +42,8 @@ public class TicketServicesImpl implements TicketServices {
 
     @Override
     public Collection<Ticket> getAllTickets() throws Exception {
-        isTicketExist(null);
+        if (ticketRepository.findAll() == null)
+            throw new Exception("There are no tickets");
 
         return ticketRepository.findAll();
     }
