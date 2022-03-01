@@ -37,6 +37,7 @@ public class UserRestController {
     @PostMapping
     public ResponseEntity<User> addUser(@RequestBody User user) throws Exception {
         User savedUser = userServices.addUser(user);
+
         return ResponseEntity.created(new URI("/user" + savedUser.getId())).body(savedUser);
     }
 
