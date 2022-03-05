@@ -1,22 +1,22 @@
 package henry.goldencinema.service;
 
 import henry.goldencinema.entity.User;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.Collection;
+import java.util.Optional;
 
 public interface UserServices {
 
-    User addUser(User user) throws Exception;
+    void deleteUserById(String id);
 
-    User updateUser(User user) throws Exception;
+    Optional<User> addUser(User user);
 
-    void deleteUserById(String id) throws Exception;
+    Optional<User> updateUser(User user);
 
-    User getUserById(String id) throws UsernameNotFoundException;
+    Optional<Collection<User>> getAllUsers();
 
-    User getUserByEmail(String email) throws UsernameNotFoundException;
+    Optional<User> getUserById(String id);
 
-    Collection<User> getAllUsers() throws Exception;
+    Optional<User> getUserByEmail(String email);
 
 }

@@ -6,11 +6,11 @@ import henry.goldencinema.repository.RoleRepository;
 import henry.goldencinema.repository.UserRepository;
 import henry.goldencinema.service.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.Optional;
 
 @Service
 public class UserServicesImpl implements UserServices {
@@ -22,61 +22,35 @@ public class UserServicesImpl implements UserServices {
     private RoleRepository roleRepository;
 
     @Override
-    public User addUser(User user) throws Exception {
-        if (userRepository.findUserByEmail(user.getEmail()) != null)
-            throw new Exception("User already exist for email: " + user.getEmail());
-
+    public Optional<User> addUser(User user) {
         user.getRoles().add(roleRepository.findRoleByName(ERole.ROLE_USER));
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
 
-        System.out.println("save user: " + user);
-
-        return userRepository.save(user);
+        return Optional.of(userRepository.save(user));
     }
 
     @Override
-    public User updateUser(User user) {
-        isUserExist(user.getId(), null);
-
-        return userRepository.save(user);
+    public Optional<User> updateUser(User user) {
+        return Optional.of(userRepository.save(user));
     }
 
     @Override
     public void deleteUserById(String id) {
-        isUserExist(id, null);
-
         userRepository.deleteById(id);
     }
 
     @Override
-    public User getUserById(String id) throws UsernameNotFoundException {
-        isUserExist(id, null);
-
+    public Optional<User> getUserById(String id) {
         return userRepository.findUserById(id);
     }
 
     @Override
-    public User getUserByEmail(String email) throws UsernameNotFoundException {
-        isUserExist(null, email);
-
-        return userRepository.findUserByEmail(email);
+    public Optional<User> getUserByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 
     @Override
-    public Collection<User> getAllUsers() throws Exception {
-        if (userRepository.findAll() == null)
-            throw new Exception("There are no users");
-
-        return userRepository.findAll();
-    }
-
-    private void isUserExist(String id, String email) throws UsernameNotFoundException {
-        if (id == null) {
-            if (userRepository.findUserByEmail(email) == null)
-                throw new UsernameNotFoundException("User not found for email: " + email);
-        } else {
-            if (userRepository.findUserById(id) == null)
-                throw new UsernameNotFoundException("User not found for id: " + id);
-        }
+    public Optional<Collection<User>> getAllUsers() {
+        return Optional.of(userRepository.findAll());
     }
 }
