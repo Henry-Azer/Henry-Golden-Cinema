@@ -8,6 +8,8 @@ import henry.goldencinema.service.ReviewServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class ReviewServicesImpl implements ReviewServices {
 
@@ -18,12 +20,12 @@ public class ReviewServicesImpl implements ReviewServices {
     private MessageRepository messageRepository;
 
     @Override
-    public Rate addRate(Rate rate) {
-        return rateRepository.save(rate);
+    public Optional<Rate> addRate(Rate rate) {
+        return Optional.of(rateRepository.save(rate));
     }
 
     @Override
-    public Message addMessage(Message message) {
-        return messageRepository.save(message);
+    public Optional<Message> addMessage(Message message) {
+        return Optional.of(messageRepository.save(message));
     }
 }
