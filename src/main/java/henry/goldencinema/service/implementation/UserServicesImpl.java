@@ -22,6 +22,21 @@ public class UserServicesImpl implements UserServices {
     private RoleRepository roleRepository;
 
     @Override
+    public Optional<Collection<User>> getAllUsers() {
+        return Optional.of(userRepository.findAll());
+    }
+
+    @Override
+    public Optional<User> getUserById(String id) {
+        return userRepository.findUserById(id);
+    }
+
+    @Override
+    public Optional<User> getUserByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
+    @Override
     public Optional<User> addUser(User user) {
         user.getRoles().add(roleRepository.findRoleByName(ERole.ROLE_USER));
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
@@ -37,20 +52,5 @@ public class UserServicesImpl implements UserServices {
     @Override
     public void deleteUserById(String id) {
         userRepository.deleteById(id);
-    }
-
-    @Override
-    public Optional<User> getUserById(String id) {
-        return userRepository.findUserById(id);
-    }
-
-    @Override
-    public Optional<User> getUserByEmail(String email) {
-        return userRepository.findByEmail(email);
-    }
-
-    @Override
-    public Optional<Collection<User>> getAllUsers() {
-        return Optional.of(userRepository.findAll());
     }
 }
