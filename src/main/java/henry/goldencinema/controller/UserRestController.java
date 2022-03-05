@@ -38,7 +38,7 @@ public class UserRestController {
     public ResponseEntity<?> getUserByEmail(@PathVariable String email) {
         Optional<User> user = userServices.getUserByEmail(email);
 
-        if (user.isPresent())
+        if (user.isEmpty())
             return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse(
                     HttpStatus.BAD_REQUEST.value(), LocalDateTime.now().toString(),
                     "User not found for email: " + email, ""));
@@ -52,7 +52,7 @@ public class UserRestController {
     public ResponseEntity<?> getUserById(@PathVariable String id) {
         Optional<User> user = userServices.getUserById(id);
 
-        if (user.isPresent())
+        if (user.isEmpty())
             return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse(
                     HttpStatus.BAD_REQUEST.value(), LocalDateTime.now().toString(),
                     "User not found for id: " + id, ""));
@@ -66,7 +66,7 @@ public class UserRestController {
     public ResponseEntity<?> addUser(@RequestBody User user) {
         Optional<User> existedUser = userServices.getUserByEmail(user.getEmail());
 
-        if (existedUser.isPresent())
+        if (existedUser.isEmpty())
             return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse(
                     HttpStatus.BAD_REQUEST.value(), LocalDateTime.now().toString(),
                     "User already exist for email: " + user.getEmail(), ""));
@@ -81,7 +81,7 @@ public class UserRestController {
     public ResponseEntity<?> updateUser(@RequestBody User user) {
         Optional<User> existedUser = userServices.getUserById(user.getId());
 
-        if (existedUser.isPresent())
+        if (existedUser.isEmpty())
             return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse(
                     HttpStatus.BAD_REQUEST.value(), LocalDateTime.now().toString(),
                     "User not found", user));
@@ -96,7 +96,7 @@ public class UserRestController {
     public ResponseEntity<?> deleteUser(@PathVariable String id) {
         Optional<User> existedUser = userServices.getUserById(id);
 
-        if (existedUser.isPresent())
+        if (existedUser.isEmpty())
             return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse(
                     HttpStatus.BAD_REQUEST.value(), LocalDateTime.now().toString(),
                     "User not found for id: " + id, ""));
