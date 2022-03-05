@@ -28,12 +28,12 @@ public class UserServicesImpl implements UserServices {
 
     @Override
     public Optional<User> getUserById(String id) {
-        return userRepository.findUserById(id);
+        return Optional.of(userRepository.findUserById(id));
     }
 
     @Override
     public Optional<User> getUserByEmail(String email) {
-        return userRepository.findByEmail(email);
+        return Optional.of(userRepository.findUserByEmail(email));
     }
 
     @Override
