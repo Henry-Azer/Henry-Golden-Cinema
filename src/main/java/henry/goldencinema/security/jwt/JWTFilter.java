@@ -43,7 +43,7 @@ public class JWTFilter extends OncePerRequestFilter {
                 ObjectMapper mapper = new ObjectMapper();
                 mapper.writeValue(out,
                         new ApiResponse(HttpStatus.UNAUTHORIZED.value(),
-                                LocalDateTime.now().toString(), "Invalid JWT Token in Bearer Header", ""));
+                                LocalDateTime.now().toString(), "Invalid JWT Token in GCin Header", ""));
                 out.flush();
 
             } else {

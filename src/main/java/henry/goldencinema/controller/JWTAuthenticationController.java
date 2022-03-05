@@ -7,12 +7,15 @@ import henry.goldencinema.entity.responses.JWTResponse;
 import henry.goldencinema.security.jwt.JWTUtil;
 import henry.goldencinema.service.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @CrossOrigin
 @RestController
@@ -29,7 +32,7 @@ public class JWTAuthenticationController {
     private AuthenticationManager authenticationManager;
 
     @PostMapping("/login")
-    public ApiResponse loginHandler(@RequestBody JWTRequest body) {
+    public ResponseEntity<?> loginHandler(@RequestBody JWTRequest body) {
         try {
             UsernamePasswordAuthenticationToken authInputToken =
                     new UsernamePasswordAuthenticationToken(body.getEmail(), body.getPassword());
@@ -37,12 +40,16 @@ public class JWTAuthenticationController {
             authenticationManager.authenticate(authInputToken);
             String jwtToken = jwtUtil.generateToken(body.getEmail());
 
-            User loggedUser = userServices.getUserByEmail(body.getEmail());
-            return new ApiResponse(200, LocalDateTime.now().toString(), "Logged in successfully.",
-                    new JWTResponse(jwtToken, loggedUser));
+            Optional<User> loggedUser = userServices.getUserByEmail(body.getEmail());
+            assert loggedUser.isPresent();
+
+            return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse(
+                    HttpStatus.OK.value(), LocalDateTime.now().toString(),
+                    "User logged in successfully", new JWTResponse(jwtToken, loggedUser.get())));
 
         } catch (AuthenticationException authExc) {
-            return new ApiResponse(500, LocalDateTime.now().toString(), authExc.getMessage(), "");
+            return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse(
+                    HttpStatus.NOT_FOUND.value(), LocalDateTime.now().toString(), authExc.getMessage(), authExc));
         }
     }
 
