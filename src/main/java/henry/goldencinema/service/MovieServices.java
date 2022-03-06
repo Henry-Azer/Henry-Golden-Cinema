@@ -3,21 +3,21 @@ package henry.goldencinema.service;
 import henry.goldencinema.entity.Movie;
 
 import java.util.Collection;
+import java.util.Optional;
 
 public interface MovieServices {
 
-    Movie addMovie(Movie movie);
+    Optional<Collection<Movie>> getAllMovies();
 
-    Movie updateMovie(Movie movie) throws Exception;
+    Optional<Collection<Movie>> getMoviesNowPlaying();
 
-    void deleteMovieById(String id) throws Exception;
+    Optional<Movie> getMovieById(String id);
 
-    Movie getMovieById(String id) throws Exception;
+    Optional<Movie> getMovieByTitle(String title);
 
-    Movie getMovieByTitle(String title) throws Exception;
+    Optional<Movie> addMovie(Movie movie);
 
-    Collection<Movie> getMoviesNowPlaying() throws Exception;
+    Optional<Movie> updateMovie(Movie movie);
 
-    Collection<Movie> getAllMovies() throws Exception;
-
+    void deleteMovieById(String id);
 }

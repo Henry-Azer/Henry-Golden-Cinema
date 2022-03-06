@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.Optional;
 
 @Service
 public class MovieServicesImpl implements MovieServices {
@@ -15,63 +16,41 @@ public class MovieServicesImpl implements MovieServices {
     private MovieRepository movieRepository;
 
     @Override
-    public Movie addMovie(Movie movie) {
-        return movieRepository.save(movie);
+    public Optional<Collection<Movie>> getAllMovies() {
+        return Optional.of(movieRepository.findAll());
     }
 
     @Override
-    public Movie updateMovie(Movie movie) throws Exception {
-        isMovieExist(movie.getId(), null);
+    public Optional<Collection<Movie>> getMoviesNowPlaying() {
 
-        return movieRepository.save(movie);
+        return Optional.of(movieRepository.getMoviesByNowPlaying(true));
     }
 
     @Override
-    public void deleteMovieById(String id) throws Exception {
-        isMovieExist(id, null);
+    public Optional<Movie> getMovieById(String id) {
 
+
+        return Optional.of(movieRepository.findMovieById(id));
+    }
+
+    @Override
+    public Optional<Movie> getMovieByTitle(String title) {
+        return Optional.of(movieRepository.findMovieByTitle(title));
+    }
+
+    @Override
+    public Optional<Movie> addMovie(Movie movie) {
+        return Optional.of(movieRepository.save(movie));
+    }
+
+    @Override
+    public Optional<Movie> updateMovie(Movie movie) {
+
+        return Optional.of(movieRepository.save(movie));
+    }
+
+    @Override
+    public void deleteMovieById(String id) {
         movieRepository.deleteById(id);
-    }
-
-    @Override
-    public Movie getMovieById(String id) throws Exception {
-        isMovieExist(id, null);
-
-        return movieRepository.findMovieById(id);
-    }
-
-    @Override
-    public Collection<Movie> getAllMovies() throws Exception {
-        if (movieRepository.findAll() == null)
-            throw new Exception("There are no movies");
-
-        return movieRepository.findAll();
-    }
-
-    @Override
-    public Movie getMovieByTitle(String title) throws Exception {
-        isMovieExist(null, title);
-
-        return movieRepository.findMovieByTitle(title);
-    }
-
-    @Override
-    public Collection<Movie> getMoviesNowPlaying() throws Exception {
-        isMovieExist(null, null);
-
-        return movieRepository.getMoviesByNowPlaying(true);
-    }
-
-    private void isMovieExist(String id, String title) throws Exception {
-        if (movieRepository.findAll() == null)
-            throw new Exception("There are no movies");
-
-        if (id != null) {
-            if (movieRepository.findMovieById(id) == null)
-                throw new Exception("Movie not found for id: " + id);
-        } else if (title != null) {
-            if (movieRepository.findMovieByTitle(title) == null)
-                throw new Exception("Movie not found for title: " + title);
-        }
     }
 }
