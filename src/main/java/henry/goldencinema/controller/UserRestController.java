@@ -88,7 +88,7 @@ public class UserRestController {
 
         return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse(
                 HttpStatus.OK.value(), LocalDateTime.now().toString(),
-                "User created successfully", userServices.updateUser(user)));
+                "User updated successfully", userServices.updateUser(user)));
     }
 
     @DeleteMapping("/{id}")
