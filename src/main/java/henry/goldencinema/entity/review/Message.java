@@ -1,38 +1,27 @@
-package henry.goldencinema.entity;
+package henry.goldencinema.entity.review;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.DocumentReference;
 import org.springframework.data.mongodb.core.mapping.Field;
-
-import java.util.HashSet;
-import java.util.Set;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Document
-public class User {
+public class Message {
 
     @Id
     private String id;
 
     @Field
-    private String username;
-
-    @Field
-    @Indexed(unique = true)
     private String email;
 
     @Field
-    private String password;
+    private String subject;
 
     @Field
-    @DocumentReference
-    private Set<Role> roles = new HashSet<>();
-
+    private String message;
 }

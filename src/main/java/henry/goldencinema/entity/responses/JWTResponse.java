@@ -1,6 +1,6 @@
 package henry.goldencinema.entity.responses;
 
-import henry.goldencinema.entity.User;
+import henry.goldencinema.entity.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

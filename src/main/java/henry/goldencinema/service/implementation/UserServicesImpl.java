@@ -1,6 +1,6 @@
 package henry.goldencinema.service.implementation;
 
-import henry.goldencinema.entity.User;
+import henry.goldencinema.entity.user.User;
 import henry.goldencinema.entity.enums.ERole;
 import henry.goldencinema.repository.RoleRepository;
 import henry.goldencinema.repository.UserRepository;

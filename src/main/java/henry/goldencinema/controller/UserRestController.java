@@ -1,6 +1,6 @@
 package henry.goldencinema.controller;
 
-import henry.goldencinema.entity.User;
+import henry.goldencinema.entity.user.User;
 import henry.goldencinema.entity.responses.ApiResponse;
 import henry.goldencinema.service.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;

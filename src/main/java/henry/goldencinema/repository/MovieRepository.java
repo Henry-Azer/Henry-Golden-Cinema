@@ -1,6 +1,6 @@
 package henry.goldencinema.repository;
 
-import henry.goldencinema.entity.Movie;
+import henry.goldencinema.entity.cinema.Movie;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

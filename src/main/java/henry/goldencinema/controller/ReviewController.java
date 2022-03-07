@@ -1,7 +1,7 @@
 package henry.goldencinema.controller;
 
-import henry.goldencinema.entity.Message;
-import henry.goldencinema.entity.Rate;
+import henry.goldencinema.entity.review.Message;
+import henry.goldencinema.entity.review.Rate;
 import henry.goldencinema.entity.responses.ApiResponse;
 import henry.goldencinema.service.ReviewServices;
 import org.springframework.beans.factory.annotation.Autowired;

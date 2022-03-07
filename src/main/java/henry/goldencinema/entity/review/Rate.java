@@ -1,6 +1,5 @@
-package henry.goldencinema.entity;
+package henry.goldencinema.entity.review;
 
-import henry.goldencinema.entity.enums.ERole;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,17 +7,21 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Document
-public class Role {
+public class Rate {
 
     @Id
     private String id;
 
     @Field
-    private ERole name;
+    private Boolean firstTime;
 
+    @Field
+    private Integer rate;
+
+    @Field
+    private String review;
 }

@@ -1,7 +1,7 @@
 package henry.goldencinema.service.implementation;
 
-import henry.goldencinema.entity.Message;
-import henry.goldencinema.entity.Rate;
+import henry.goldencinema.entity.review.Message;
+import henry.goldencinema.entity.review.Rate;
 import henry.goldencinema.repository.MessageRepository;
 import henry.goldencinema.repository.RateRepository;
 import henry.goldencinema.service.ReviewServices;

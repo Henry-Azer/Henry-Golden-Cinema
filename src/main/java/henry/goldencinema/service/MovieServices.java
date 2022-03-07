@@ -1,6 +1,6 @@
 package henry.goldencinema.service;
 
-import henry.goldencinema.entity.Movie;
+import henry.goldencinema.entity.cinema.Movie;
 
 import java.util.Collection;
 import java.util.Optional;

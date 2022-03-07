@@ -1,4 +1,4 @@
-package henry.goldencinema.entity;
+package henry.goldencinema.entity.cinema;
 
 
 import lombok.AllArgsConstructor;

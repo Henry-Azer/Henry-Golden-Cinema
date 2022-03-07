@@ -1,6 +1,6 @@
 package henry.goldencinema.service;
 
-import henry.goldencinema.entity.User;
+import henry.goldencinema.entity.user.User;
 
 import java.util.Collection;
 import java.util.Optional;

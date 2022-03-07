@@ -1,6 +1,6 @@
 package henry.goldencinema.controller;
 
-import henry.goldencinema.entity.Movie;
+import henry.goldencinema.entity.cinema.Movie;
 import henry.goldencinema.entity.responses.ApiResponse;
 import henry.goldencinema.service.MovieServices;
 import org.springframework.beans.factory.annotation.Autowired;

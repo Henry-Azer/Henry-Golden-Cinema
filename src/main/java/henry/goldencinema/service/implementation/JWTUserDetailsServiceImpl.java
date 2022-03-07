@@ -1,7 +1,7 @@
 package henry.goldencinema.service.implementation;
 
-import henry.goldencinema.entity.User;
-import henry.goldencinema.entity.UserDetailsImpl;
+import henry.goldencinema.entity.user.User;
+import henry.goldencinema.entity.user.UserDetailsImpl;
 import henry.goldencinema.repository.UserRepository;
 import henry.goldencinema.service.JWTUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;

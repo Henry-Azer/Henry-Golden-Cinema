@@ -1,7 +1,7 @@
 package henry.goldencinema.service;
 
-import henry.goldencinema.entity.Message;
-import henry.goldencinema.entity.Rate;
+import henry.goldencinema.entity.review.Message;
+import henry.goldencinema.entity.review.Rate;
 
 import java.util.Optional;
 
