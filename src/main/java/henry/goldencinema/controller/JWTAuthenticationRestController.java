@@ -20,7 +20,7 @@ import java.util.Optional;
 @CrossOrigin
 @RestController
 @RequestMapping("/api/auth")
-public class JWTAuthenticationController {
+public class JWTAuthenticationRestController {
 
     @Autowired
     private JWTUtil jwtUtil;

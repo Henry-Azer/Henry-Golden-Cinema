@@ -17,7 +17,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/review")
-public class ReviewController {
+public class ReviewRestController {
 
     @Autowired
     private ReviewServices reviewServices;
