@@ -8,7 +8,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-import java.time.LocalDateTime;
 import java.util.Collection;
 
 @Data
@@ -35,9 +34,4 @@ public class Movie {
     @Field
     private Collection<String> actors, writers;
 
-    @Field
-    private Collection<LocalDateTime> showDates;
-
-    @Field
-    private Collection<Integer> seats;
 }
