@@ -49,7 +49,7 @@ public class JWTAuthenticationRestController {
 
         } catch (AuthenticationException authExc) {
             return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse(
-                    HttpStatus.NOT_FOUND.value(), LocalDateTime.now().toString(), authExc.getMessage(), authExc));
+                    HttpStatus.NOT_FOUND.value(), LocalDateTime.now().toString(), "Invalid email or password", authExc));
         }
     }
 
