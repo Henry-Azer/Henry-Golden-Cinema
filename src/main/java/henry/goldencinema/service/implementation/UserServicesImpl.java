@@ -23,7 +23,7 @@ public class UserServicesImpl implements UserServices {
 
     @Override
     public Optional<Collection<User>> getAllUsers() {
-        return Optional.of(userRepository.findAll());
+        return Optional.ofNullable(userRepository.findAll());
     }
 
     @Override

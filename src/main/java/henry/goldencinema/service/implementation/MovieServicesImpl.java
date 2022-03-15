@@ -17,7 +17,7 @@ public class MovieServicesImpl implements MovieServices {
 
     @Override
     public Optional<Collection<Movie>> getAllMovies() {
-        return Optional.of(movieRepository.findAll());
+        return Optional.ofNullable(movieRepository.findAll());
     }
 
     @Override
