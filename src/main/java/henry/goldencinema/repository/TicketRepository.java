@@ -1,6 +1,9 @@
 package henry.goldencinema.repository;
 
-import henry.goldencinema.entity.Ticket;
+import henry.goldencinema.entity.cinema.Hall;
+import henry.goldencinema.entity.cinema.Movie;
+import henry.goldencinema.entity.cinema.Ticket;
+import henry.goldencinema.entity.user.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,11 +17,10 @@ public interface TicketRepository extends MongoRepository<Ticket, String> {
 
     Ticket findTicketById(String id);
 
-    Collection<Ticket> findTicketsByHall(String hall);
+    Collection<Ticket> findTicketsByUser(User user);
 
-    Collection<Ticket> findTicketsByUsername(String username);
+    Collection<Ticket> findTicketsByHall(Hall hall);
 
-    Collection<Ticket> findTicketsByMovieTitle(String movieTitle);
-
+    Collection<Ticket> findTicketsByMovie(Movie movie);
 
 }

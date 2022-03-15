@@ -1,25 +1,29 @@
 package henry.goldencinema.service;
 
-import henry.goldencinema.entity.Ticket;
+import henry.goldencinema.entity.cinema.Hall;
+import henry.goldencinema.entity.cinema.Movie;
+import henry.goldencinema.entity.cinema.Ticket;
+import henry.goldencinema.entity.user.User;
 
 import java.util.Collection;
+import java.util.Optional;
 
 public interface TicketServices {
 
-    Ticket addTicket(Ticket ticket);
+    Optional<Collection<Ticket>> getAllTickets();
 
-    Ticket updateTicket(Ticket ticket) throws Exception;
+    Optional<Collection<Ticket>> getTicketsByHall(Hall hall);
 
-    void deleteTicketById(String id) throws Exception;
+    Optional<Collection<Ticket>> getTicketsByUser(User user);
 
-    Ticket getTicketById(String id) throws Exception;
+    Optional<Collection<Ticket>> getTicketsByMovie(Movie movie);
 
-    Collection<Ticket> getAllTickets() throws Exception;
+    Optional<Ticket> getTicketById(String id);
 
-    Collection<Ticket> getTicketsByHall(String hall) throws Exception;
+    Optional<Ticket> addTicket(Ticket ticket);
 
-    Collection<Ticket> getTicketsByUsername(String username) throws Exception;
+    Optional<Ticket> updateTicket(Ticket ticket);
 
-    Collection<Ticket> getTicketsByMovieTitle(String movieTitle) throws Exception;
+    void deleteTicketById(String id);
 
 }

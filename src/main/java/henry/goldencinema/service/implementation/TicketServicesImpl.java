@@ -1,12 +1,16 @@
 package henry.goldencinema.service.implementation;
 
-import henry.goldencinema.entity.Ticket;
+import henry.goldencinema.entity.cinema.Hall;
+import henry.goldencinema.entity.cinema.Movie;
+import henry.goldencinema.entity.cinema.Ticket;
+import henry.goldencinema.entity.user.User;
 import henry.goldencinema.repository.TicketRepository;
 import henry.goldencinema.service.TicketServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.Optional;
 
 @Service
 public class TicketServicesImpl implements TicketServices {
@@ -15,68 +19,46 @@ public class TicketServicesImpl implements TicketServices {
     private TicketRepository ticketRepository;
 
     @Override
-    public Ticket addTicket(Ticket ticket) {
-        return ticketRepository.save(ticket);
+    public Optional<Collection<Ticket>> getAllTickets() {
+        return Optional.of(ticketRepository.findAll());
     }
 
     @Override
-    public Ticket updateTicket(Ticket ticket) throws Exception {
-        isTicketExist(ticket.getId());
-
-        return ticketRepository.save(ticket);
+    public Optional<Collection<Ticket>> getTicketsByUser(User user) {
+        return Optional.ofNullable(ticketRepository.findTicketsByUser(user));
     }
 
     @Override
-    public void deleteTicketById(String id) throws Exception {
-        isTicketExist(id);
+    public Optional<Collection<Ticket>> getTicketsByMovie(Movie movie) {
+        return Optional.ofNullable(ticketRepository.findTicketsByMovie(movie));
+    }
+
+    @Override
+    public Optional<Collection<Ticket>> getTicketsByHall(Hall hall) {
+        return Optional.ofNullable(ticketRepository.findTicketsByHall(hall));
+    }
+
+    @Override
+    public Optional<Ticket> getTicketById(String id) {
+
+        return Optional.ofNullable(ticketRepository.findTicketById(id));
+    }
+
+    @Override
+    public Optional<Ticket> addTicket(Ticket ticket) {
+        return Optional.of(ticketRepository.save(ticket));
+
+    }
+
+    @Override
+    public Optional<Ticket> updateTicket(Ticket ticket) {
+        return Optional.of(ticketRepository.save(ticket));
+    }
+
+    @Override
+    public void deleteTicketById(String id) {
 
         ticketRepository.deleteById(id);
     }
 
-    @Override
-    public Ticket getTicketById(String id) throws Exception {
-        isTicketExist(id);
-
-        return ticketRepository.findTicketById(id);
-    }
-
-    @Override
-    public Collection<Ticket> getAllTickets() throws Exception {
-        if (ticketRepository.findAll() == null)
-            throw new Exception("There are no tickets");
-
-        return ticketRepository.findAll();
-    }
-
-    @Override
-    public Collection<Ticket> getTicketsByUsername(String username) throws Exception {
-        if (ticketRepository.findTicketsByUsername(username) == null)
-            throw new Exception("Tickets not found for user: " + username);
-
-        return ticketRepository.findTicketsByUsername(username);
-    }
-
-    @Override
-    public Collection<Ticket> getTicketsByMovieTitle(String movieTitle) throws Exception {
-        if (ticketRepository.findTicketsByMovieTitle(movieTitle) == null)
-            throw new Exception("Tickets not found for movie: " + movieTitle);
-
-        return ticketRepository.findTicketsByMovieTitle(movieTitle);
-    }
-
-    @Override
-    public Collection<Ticket> getTicketsByHall(String hall) throws Exception {
-        if (ticketRepository.findTicketsByHall(hall) == null)
-            throw new Exception("Movie not found for hall: " + hall);
-
-        return ticketRepository.findTicketsByHall(hall);
-    }
-
-    private void isTicketExist(String id) throws Exception {
-        if (ticketRepository.findAll() == null)
-            throw new Exception("There are no tickets");
-
-        if (ticketRepository.findTicketById(id) == null)
-            throw new Exception("Tickets not found for id: " + id);
-    }
 }

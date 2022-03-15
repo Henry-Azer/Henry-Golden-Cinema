@@ -1,5 +1,6 @@
-package henry.goldencinema.entity;
+package henry.goldencinema.entity.cinema;
 
+import henry.goldencinema.entity.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,7 +9,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Data
 @NoArgsConstructor
@@ -20,20 +22,26 @@ public class Ticket {
     private String id;
 
     @Field
-    private Date showDateAndTime;
+    @DocumentReference
+    private User user;
 
     @Field
-    private String hall;
+    @DocumentReference
+    private Movie movie;
+
+    @Field
+    @DocumentReference
+    private Hall hall;
+
+    @Field
+    private LocalDate date;
+
+    @Field
+    private LocalTime time;
 
     @Field
     private Integer seat;
 
     @Field
-    @DocumentReference
-    private String movieTitle;
-
-    @Field
-    @DocumentReference
-    private User user;
-
+    private Byte[] image;
 }

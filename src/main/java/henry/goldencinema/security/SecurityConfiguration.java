@@ -69,8 +69,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.PUT, "/api/user").hasAnyRole("USER", "ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/api/user/{id}").hasAnyRole("USER", "ADMIN")
                 // Ticket matchers
-                .antMatchers("/api/ticket/**").hasAnyRole("ADMIN", "USER")
-                .antMatchers("/api/ticket/username/{username}").hasAnyRole("USER", "ADMIN")
+                .antMatchers("/api/ticket/all").hasRole("ADMIN")
+                .antMatchers("/api/ticket/hall-name").hasRole("ADMIN")
+                .antMatchers("/api/ticket/movie-title").hasRole("ADMIN")
+                .antMatchers("/api/ticket/id/{id}").hasRole("ADMIN")
+                .antMatchers("/api/ticket/user-email/{email}").hasAnyRole("USER", "ADMIN")
                 .antMatchers(HttpMethod.POST, "/api/ticket").hasAnyRole("USER", "ADMIN")
                 .antMatchers(HttpMethod.PUT, "/api/ticket").hasAnyRole("USER", "ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/api/ticket/{id}").hasAnyRole("USER", "ADMIN");
