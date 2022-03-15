@@ -22,20 +22,17 @@ public class MovieServicesImpl implements MovieServices {
 
     @Override
     public Optional<Collection<Movie>> getMoviesNowPlaying() {
-
-        return Optional.of(movieRepository.getMoviesByNowPlaying(true));
+        return Optional.ofNullable(movieRepository.getMoviesByNowPlaying(true));
     }
 
     @Override
     public Optional<Movie> getMovieById(String id) {
-
-
-        return Optional.of(movieRepository.findMovieById(id));
+        return Optional.ofNullable(movieRepository.findMovieById(id));
     }
 
     @Override
     public Optional<Movie> getMovieByTitle(String title) {
-        return Optional.of(movieRepository.findMovieByTitle(title));
+        return Optional.ofNullable(movieRepository.findMovieByTitle(title));
     }
 
     @Override
@@ -45,7 +42,6 @@ public class MovieServicesImpl implements MovieServices {
 
     @Override
     public Optional<Movie> updateMovie(Movie movie) {
-
         return Optional.of(movieRepository.save(movie));
     }
 

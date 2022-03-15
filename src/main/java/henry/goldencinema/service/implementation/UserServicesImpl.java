@@ -1,7 +1,7 @@
 package henry.goldencinema.service.implementation;
 
-import henry.goldencinema.entity.user.User;
 import henry.goldencinema.entity.enums.ERole;
+import henry.goldencinema.entity.user.User;
 import henry.goldencinema.repository.RoleRepository;
 import henry.goldencinema.repository.UserRepository;
 import henry.goldencinema.service.UserServices;
@@ -28,12 +28,12 @@ public class UserServicesImpl implements UserServices {
 
     @Override
     public Optional<User> getUserById(String id) {
-        return Optional.of(userRepository.findUserById(id));
+        return Optional.ofNullable(userRepository.findUserById(id));
     }
 
     @Override
     public Optional<User> getUserByEmail(String email) {
-        return Optional.of(userRepository.findUserByEmail(email));
+        return Optional.ofNullable(userRepository.findUserByEmail(email));
     }
 
     @Override
