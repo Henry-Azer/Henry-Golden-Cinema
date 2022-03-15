@@ -77,7 +77,7 @@ public class MovieRestController {
     public ResponseEntity<?> addMovie(@RequestBody Movie movie) {
         Optional<Movie> existedMovie = movieServices.getMovieByTitle(movie.getTitle());
 
-        if (existedMovie.isEmpty())
+        if (existedMovie.isPresent())
             return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse(
                     HttpStatus.BAD_REQUEST.value(), LocalDateTime.now().toString(),
                     "Movie already exist for title: " + movie.getTitle(), ""));

@@ -66,7 +66,7 @@ public class UserRestController {
     public ResponseEntity<?> addUser(@RequestBody User user) {
         Optional<User> existedUser = userServices.getUserByEmail(user.getEmail());
 
-        if (existedUser.isEmpty())
+        if (existedUser.isPresent())
             return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse(
                     HttpStatus.BAD_REQUEST.value(), LocalDateTime.now().toString(),
                     "User already exist for email: " + user.getEmail(), ""));
