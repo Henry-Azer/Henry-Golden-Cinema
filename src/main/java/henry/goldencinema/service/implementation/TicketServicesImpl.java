@@ -4,6 +4,7 @@ import henry.goldencinema.entity.cinema.Hall;
 import henry.goldencinema.entity.cinema.Movie;
 import henry.goldencinema.entity.cinema.Ticket;
 import henry.goldencinema.entity.user.User;
+import henry.goldencinema.image.processing.TicketImageProcess;
 import henry.goldencinema.repository.TicketRepository;
 import henry.goldencinema.service.TicketServices;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,24 +41,25 @@ public class TicketServicesImpl implements TicketServices {
 
     @Override
     public Optional<Ticket> getTicketById(String id) {
-
         return Optional.ofNullable(ticketRepository.findTicketById(id));
     }
 
     @Override
     public Optional<Ticket> addTicket(Ticket ticket) {
-        return Optional.of(ticketRepository.save(ticket));
+        ticket.setImage(TicketImageProcess.generateTicketImage(ticket));
 
+        return Optional.of(ticketRepository.save(ticket));
     }
 
     @Override
     public Optional<Ticket> updateTicket(Ticket ticket) {
+        ticket.setImage(TicketImageProcess.generateTicketImage(ticket));
+
         return Optional.of(ticketRepository.save(ticket));
     }
 
     @Override
     public void deleteTicketById(String id) {
-
         ticketRepository.deleteById(id);
     }
 

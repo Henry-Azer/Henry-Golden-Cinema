@@ -49,19 +49,21 @@ public class TicketRestController {
                 HttpStatus.OK.value(), LocalDateTime.now().toString(), "Tickets list", tickets));
     }
 
-    @GetMapping("/user-email/{email}")
-    @PreAuthorize("#email == authentication.name")
-    public ResponseEntity<?> getTicketByUser(@PathVariable String email) {
+    @GetMapping("/auth-id/{id}")
+    public ResponseEntity<?> getTicketsByUserId(@PathVariable String id) {
         Optional<Collection<Ticket>> tickets = Optional.empty();
-        Optional<User> user = userServices.getUserByEmail(email);
+        Optional<User> user = userServices.getUserById(id);
+        String email = "";
 
-        if (user.isPresent())
+        if (user.isPresent()) {
             tickets = ticketServices.getTicketsByUser(user.get());
+            email = user.get().getEmail();
+        }
 
         if (tickets.isEmpty())
             return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse(
                     HttpStatus.BAD_REQUEST.value(), LocalDateTime.now().toString(),
-                    "Empty tickets list for email: " + email, ""));
+                    "Empty tickets list for email: " + email , ""));
 
         return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse(
                 HttpStatus.OK.value(), LocalDateTime.now().toString(),
@@ -69,7 +71,7 @@ public class TicketRestController {
     }
 
     @GetMapping("/movie-title/{movieTitle}")
-    public ResponseEntity<?> getTicketByMovieTitle(@PathVariable String movieTitle) {
+    public ResponseEntity<?> getTicketsByMovieTitle(@PathVariable String movieTitle) {
         Optional<Collection<Ticket>> tickets = Optional.empty();
         Optional<Movie> movie = movieServices.getMovieByTitle(movieTitle);
 
