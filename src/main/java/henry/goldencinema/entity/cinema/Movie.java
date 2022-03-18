@@ -29,7 +29,7 @@ public class Movie {
     private Integer duration, year;
 
     @Field
-    private String title, description, language, imgURL, ytTrailerId, director, hall;
+    private String title, description, language, imgURL, ytTrailerId, director;
 
     @Field
     private Collection<String> actors, writers;
