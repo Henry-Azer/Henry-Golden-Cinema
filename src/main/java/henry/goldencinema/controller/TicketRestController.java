@@ -60,10 +60,11 @@ public class TicketRestController {
             email = user.get().getEmail();
         }
 
-        if (tickets.isEmpty())
+        assert tickets.isPresent();
+        if (tickets.get().isEmpty())
             return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse(
                     HttpStatus.BAD_REQUEST.value(), LocalDateTime.now().toString(),
-                    "Empty tickets list for email: " + email , ""));
+                    "Empty tickets list for email: " + email, ""));
 
         return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse(
                 HttpStatus.OK.value(), LocalDateTime.now().toString(),
@@ -78,7 +79,8 @@ public class TicketRestController {
         if (movie.isPresent())
             tickets = ticketServices.getTicketsByMovie(movie.get());
 
-        if (tickets.isEmpty())
+        assert tickets.isPresent();
+        if (tickets.get().isEmpty())
             return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse(
                     HttpStatus.BAD_REQUEST.value(), LocalDateTime.now().toString(),
                     "Empty tickets list for movie: " + movieTitle, ""));
@@ -96,7 +98,8 @@ public class TicketRestController {
         if (hall.isPresent())
             tickets = ticketServices.getTicketsByHall(hall.get());
 
-        if (tickets.isEmpty())
+        assert tickets.isPresent();
+        if (tickets.get().isEmpty())
             return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse(
                     HttpStatus.BAD_REQUEST.value(), LocalDateTime.now().toString(),
                     "Empty tickets list for hall: " + hallName, ""));
