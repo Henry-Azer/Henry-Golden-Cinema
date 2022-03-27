@@ -34,9 +34,13 @@ public class TicketImageProcess {
         Font subTitleFont = new Font("Century Gothic Regular", Font.PLAIN, toPixels(6));
 
         String movieTitle = ticket.getMovie().getTitle();
-        int titleSplitIndex = splitTitleAfterSecondSpaceIndex(movieTitle);
-        insertTextOnImage(ticketImage, 80, 110, movieTitle.substring(0, titleSplitIndex), titleColor, titleFont);
-        insertTextOnImage(ticketImage, 80, 160, movieTitle.substring(titleSplitIndex + 1), titleColor, titleFont);
+        if (movieTitle.length() > 18) {
+            int titleSplitIndex = splitTitleAfterSecondSpaceIndex(movieTitle);
+            insertTextOnImage(ticketImage, 80, 110, movieTitle.substring(0, titleSplitIndex), titleColor, titleFont);
+            insertTextOnImage(ticketImage, 80, 160, movieTitle.substring(titleSplitIndex + 1), titleColor, titleFont);
+        } else {
+            insertTextOnImage(ticketImage, 80, 110, movieTitle, titleColor, titleFont);
+        }
 
         insertTextOnImage(ticketImage, 80, 250, "Date: ", subTitleColor, subTitleFont);
         insertTextOnImage(ticketImage, 150, 250, ticket.getDate().toString(), subTitleColor, subTitleFont);
@@ -77,7 +81,7 @@ public class TicketImageProcess {
             if (text.charAt(i) == ' ')
                 counter++;
 
-            if (text.charAt(i) == ' ' && counter == 2)
+            if (text.charAt(i) == ' ' && counter == 3)
                 return i;
         }
 
