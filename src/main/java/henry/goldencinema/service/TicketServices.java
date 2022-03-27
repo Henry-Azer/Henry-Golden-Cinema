@@ -20,7 +20,7 @@ public interface TicketServices {
 
     Optional<Ticket> getTicketById(String id);
 
-    Optional<Ticket> addTicket(Ticket ticket);
+    Optional<Ticket> addTicket(Ticket ticket, String movieId, String authenticatedUserId);
 
     Optional<Ticket> updateTicket(Ticket ticket);
 

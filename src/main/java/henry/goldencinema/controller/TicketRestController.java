@@ -123,36 +123,27 @@ public class TicketRestController {
                 "Ticket found for id: " + id, ticket));
     }
 
-    @PostMapping
-    @PreAuthorize("#ticket.user.email == authentication.name")
-    public ResponseEntity<?> addTicket(@RequestBody Ticket ticket) {
-        Optional<User> existedUser = userServices.getUserByEmail(ticket.getUser().getEmail());
-        if (existedUser.isEmpty())
-            return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse(
-                    HttpStatus.BAD_REQUEST.value(), LocalDateTime.now().toString(),
-                    "User not found for email: " + ticket.getUser().getEmail(), ""));
-
-        Optional<Movie> existedMovie = movieServices.getMovieByTitle(ticket.getMovie().getTitle());
+    @PostMapping("/{movieId}/{authenticatedUserId}")
+    public ResponseEntity<?> addTicket(@RequestBody Ticket ticket,
+                                       @PathVariable String movieId, @PathVariable String authenticatedUserId) {
+        Optional<Movie> existedMovie = movieServices.getMovieById(movieId);
         if (existedMovie.isEmpty())
             return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse(
                     HttpStatus.BAD_REQUEST.value(), LocalDateTime.now().toString(),
-                    "Movie not found for title: " + ticket.getMovie().getTitle(), ""));
+                    "Movie not found for id: " + movieId, ""));
 
-        Optional<Hall> existedHall = hallServices.getHallByName(ticket.getHall().getName());
-        if (existedHall.isEmpty())
+        Optional<User> existedUser = userServices.getUserById(authenticatedUserId);
+        if (existedUser.isEmpty())
             return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse(
                     HttpStatus.BAD_REQUEST.value(), LocalDateTime.now().toString(),
-                    "Hall not found for name: " + ticket.getHall().getName(), ""));
+                    "User not found for id: " + authenticatedUserId, ""));
 
-        Optional<Ticket> existedTicket = ticketServices.getTicketById(ticket.getId());
-        if (existedTicket.isPresent())
-            return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse(
-                    HttpStatus.BAD_REQUEST.value(), LocalDateTime.now().toString(),
-                    "Ticket already exist for id: " + ticket.getId(), ""));
-
+        ticket.setUser(existedUser.get());
+        ticket.setMovie(existedMovie.get());
         return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse(
                 HttpStatus.OK.value(), LocalDateTime.now().toString(),
-                "Ticket Added successfully", ticketServices.addTicket(ticket)));
+                "Ticket Added successfully",
+                ticketServices.addTicket(ticket, movieId, authenticatedUserId)));
     }
 
     @PutMapping()
@@ -171,7 +162,7 @@ public class TicketRestController {
 
     }
 
-    @DeleteMapping("/{id}")
+    @PostMapping("/{id}")
     public ResponseEntity<?> deleteTicket(@PathVariable String id) {
         Optional<Ticket> existedTicket = ticketServices.getTicketById(id);
 
