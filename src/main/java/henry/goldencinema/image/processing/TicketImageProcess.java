@@ -81,7 +81,7 @@ public class TicketImageProcess {
                 return i;
         }
 
-        return 0;
+        return text.length();
     }
 
     private static byte[] bufferedImageToByteArray(BufferedImage bufferedImage) {
