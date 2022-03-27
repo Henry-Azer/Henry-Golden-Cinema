@@ -64,7 +64,7 @@ public class ShowsScheduler {
 
             for (Show show : hall.getShows()) {
                 show.getSeats().clear();
-                show.setShowDate(LocalDate.now());
+                show.setShowDate(LocalDate.now().plusDays(1));
                 show.setMovie(movie);
 
                 showServices.updateShow(show);
