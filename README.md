@@ -21,6 +21,7 @@ Spring Boot, React JS, Redux, MongoDB.
 - UI Design
 - Spring scheduler
 - Image processing
+- JWT Authentication
 - Single Page Application
 - React Functional Component
 
