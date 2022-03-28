@@ -14,7 +14,11 @@ public class WebConfiguration implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry
-                .addResourceHandler("/**/*.css", "/**/*.html", "/**/*.js", "/**/*.jsx", "/**/*.json", "/**/*.map", "/**/*.png", "/**/*.jpg", "/**/*.mp3")
+                .addResourceHandler(
+                        "/**/*.css", "/**/*.html", "/**/*.js", "/**/*.jsx", "/**/*.json", "/**/*.map",
+                        "/**/*.png", "/**/*.jpg", "/**/*.gif", "/**/*.TTF", "/**/*.ttf", "/**/*.svg",
+                        "/**/*.woff", "/**/*.eot", "/**/*.mp3")
+
                 .setCachePeriod(0)
                 .addResourceLocations("classpath:/static/");
 
