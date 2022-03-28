@@ -1,7 +1,7 @@
 
 # Henry Golden Cinema
 
-Cinema booking system (Spring Boot, React JS, Redux, MongoDB).
+Cinema booking system web application (Spring Boot, React JS, Redux, MongoDB).
 
 
 ## Deployment
